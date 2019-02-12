@@ -41,8 +41,8 @@ class IpponRepository {
         return ipponService.getConstantValue(name)
     }
 
-//    fun addEnterUser(name: String, date: Int) {
+    fun addEnterUser(name: String, date: Int) {
 //        return ipponService.addEnterUser(name, date)
-//    }
+    }
 
 }
