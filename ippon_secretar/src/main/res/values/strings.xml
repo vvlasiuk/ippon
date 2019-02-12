@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ippon secretar</string>
+    // LOGIN
+    <string name="login_title">Секретар змагань</string>
+    <string name="login_user_name">Імя користувача</string>
+    <string name="login_user_password">Пароль користувача</string>
+    <string name="login_save">Зберегти</string>
+    <string name="btn_login">Увійти</string>
+    // SHORT SETTINGS
+    <string name="desk_number">Номер столу</string>
+    //
 </resources>
