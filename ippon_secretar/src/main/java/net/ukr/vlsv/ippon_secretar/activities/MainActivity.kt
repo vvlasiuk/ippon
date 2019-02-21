@@ -14,7 +14,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+// MASTER
         lifecycle.addObserver(viewModel)
         viewModel.weatherData.observe(this, Observer {
 //            txt_main.text = it?.toString() ?: getString(R.string.no_data)
