@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ConstraintLayout">
+        <!--<item name="xmlns:android">http://schemas.android.com/apk/res/android</item>-->
+        <!--<item name="xmlns:tools">http://schemas.android.com/tools</item>-->
+        <!--<item name="xmlns:app">http://schemas.android.com/apk/res-auto</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:keepScreenOn">true</item>
+        <item name="android:orientation">vertical</item>
+        <!--<item name="android:background">@color/colorPrimaryDark</item>-->
+    </style>
+
 </resources>

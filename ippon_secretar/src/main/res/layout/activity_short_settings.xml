@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".activities.ShortSettingsActivity"
+        style="@style/ConstraintLayout">
+
+    <RelativeLayout
+            android:id="@+id/short_settings_RelativeLayout"
+            style="@style/RelativeLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_short_settings_sync"
+            style="@style/ImageButtonRight_ShortSettings"
+            app:srcCompat="@mipmap/refresh_cloud" />
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/desk_number_RelativeLayout"
+            style="@style/RelativeLayout"
+            tools:layout_editor_absoluteX="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/short_settings_RelativeLayout">
+
+        <ImageButton
+            android:id="@+id/btn_desk_number_down"
+            style="@style/ImageButtonLeft_ShortSettings"
+            app:srcCompat="@mipmap/left" />
+
+        <Spinner
+            android:id="@+id/spinner_desk_number"
+            android:layout_alignTop="@+id/btn_desk_number_up"
+            android:layout_alignBottom="@+id/btn_desk_number_down"
+            android:layout_toStartOf="@+id/btn_desk_number_up"
+            android:layout_toEndOf="@+id/btn_desk_number_down"
+            style="@style/Spinner_ShortSettings"/>
+
+        <ImageButton
+            android:id="@+id/btn_desk_number_up"
+            style="@style/ImageButtonRight_ShortSettings"
+            app:srcCompat="@mipmap/right" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/judges_number_RelativeLayout"
+        style="@style/RelativeLayout"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/desk_number_RelativeLayout">
+        <ImageButton
+            android:id="@+id/btn_judges_number_down"
+            style="@style/ImageButtonLeft_ShortSettings"
+            app:srcCompat="@mipmap/left" />
+        <Spinner
+            android:id="@+id/spinner_judges_number"
+            android:layout_alignTop="@+id/btn_judges_number_up"
+            android:layout_alignBottom="@+id/btn_judges_number_down"
+            android:layout_toStartOf="@+id/btn_judges_number_up"
+            android:layout_toEndOf="@+id/btn_judges_number_down"
+            android:hint="YES"
+            style="@style/Spinner_ShortSettings"/>
+
+        <ImageButton
+            android:id="@+id/btn_judges_number_up"
+            style="@style/ImageButtonRight_ShortSettings"
+            app:srcCompat="@mipmap/right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/short_settings_navigation_RelativeLayout"
+        style="@style/RelativeLayout"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_short_settings_next"
+            style="@style/ImageButtonLeft_ShortSettings"
+            app:srcCompat="@mipmap/quit"/>
+
+        <ImageButton
+            android:id="@+id/btn_short_settings_next"
+            style="@style/ImageButtonRight_ShortSettings"
+            app:srcCompat="@mipmap/next"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

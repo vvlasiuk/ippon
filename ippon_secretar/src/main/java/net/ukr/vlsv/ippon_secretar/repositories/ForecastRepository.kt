@@ -24,13 +24,13 @@ class ForecastRepository @Inject constructor(
     override val coroutineContext: CoroutineContext
         get() = dispatchersProvider.IO
 
-    var location
-        get() = spCache.location
-        set(value) {
-            spCache.location = value
-        }
+//    var location
+//        get() = spCache.location
+//        set(value) {
+//            spCache.location = value
+//        }
 
-    fun fetchForecast(): Deferred<WeatherResponse> = async {
-        apiClient.weatherService.getCurrentWeather(location).await()
-    }
+//    fun fetchForecast(): Deferred<WeatherResponse> = async {
+//        apiClient.weatherService.getCurrentWeather(location).await()
+//    }
 }

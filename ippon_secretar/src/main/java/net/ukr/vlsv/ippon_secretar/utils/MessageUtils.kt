@@ -16,12 +16,12 @@ import javax.inject.Singleton
 class MessageUtils @Inject constructor(private val context: Context) {
 
     @JvmOverloads
-    fun showToast(@StringRes message: Int, duration: Int = Toast.LENGTH_SHORT) {
+    fun showToast(@StringRes message: Int, duration: Int = Toast.LENGTH_LONG) {
         showToast(context.getString(message), duration)
     }
 
     @JvmOverloads
-    fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    fun showToast(message: String, duration: Int = Toast.LENGTH_LONG) {
         Handler(Looper.getMainLooper()).post { Toast.makeText(context, message, duration).show() }
     }
 
