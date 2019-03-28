@@ -1,6 +1,7 @@
 package net.ukr.vlsv.ippon_secretar.application
 
 import android.app.Application
+import android.content.Context
 import net.ukr.vlsv.ippon_secretar.dagger.components.AppComponent
 import net.ukr.vlsv.ippon_secretar.dagger.components.DaggerAppComponent
 import net.ukr.vlsv.ippon_secretar.dagger.modules.SystemModule

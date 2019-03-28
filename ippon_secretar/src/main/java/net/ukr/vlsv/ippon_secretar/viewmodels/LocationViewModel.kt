@@ -26,7 +26,7 @@ class LocationViewModel(
 
     init {
         //TODO: move this to onCreate()
-        _location.value = forecastRepository.location
+//        _location.value = forecastRepository.location
     }
 
     //region View interaction
@@ -38,7 +38,7 @@ class LocationViewModel(
                     getApplication<Application>().getString(R.string.error_empty_location)
             )
         } else {
-            forecastRepository.location = location
+//            forecastRepository.location = location
             _viewAction.value = ViewAction.Finish(Activity.RESULT_OK)
         }
     }

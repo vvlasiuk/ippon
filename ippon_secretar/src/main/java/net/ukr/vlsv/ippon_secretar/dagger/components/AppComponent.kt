@@ -9,6 +9,5 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [SystemModule::class, NetworkModule::class])
 interface AppComponent {
-
     fun inject(activity: BaseActivity)
 }

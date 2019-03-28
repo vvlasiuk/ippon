@@ -17,6 +17,8 @@ android {
         //TODO: use correct API key
         buildConfigField 'String', 'BASE_URL', '"https://openweathermap.org/data/2.5/"'
         buildConfigField 'String', 'API_KEY', '"b6907d289e10d714a6e88b30761fae22"'
+        buildConfigField 'String', 'IPPON_API_TYPE', '"1C"'
+        buildConfigField 'String', 'IPPON_API_URL', '"http://192.168.0.107"'
 
 //        testInstrumentationRunner "net.ukr.vlsv.ippon_secretar.MockTestRunner"
     }
@@ -55,10 +57,18 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+//    implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_version"
 
     //Chuck
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+    // Room
+    def room_version = "2.1.0-alpha03"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-coroutines:$room_version"
 
     //Tests
     testImplementation 'junit:junit:4.12'

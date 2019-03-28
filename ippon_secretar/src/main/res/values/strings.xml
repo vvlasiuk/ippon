@@ -8,7 +8,12 @@
     <string name="login_save">Зберегти</string>
     <string name="btn_login">Увійти</string>
     // SHORT SETTINGS
-    <string name="desk_number">Номер столу</string>
+    <!--<string name="desk_number">Номер столу:</string>-->
+    <string name="desk_number_text">Номер столу</string>
+    <string name="referee_number">Кількість суддів: 3</string>
+    <string name="age_categories">Вікові категорії:</string>
+    // MESSAGE
+    <string name="msg_API_version_err">Версія API не відповідає версії додатку</string>
     // удалити
     <string name="location">Location</string>
     <string name="change_location">Change location</string>

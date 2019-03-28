@@ -1,5 +1,6 @@
 package net.ukr.vlsv.ippon_secretar.activities
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -15,6 +16,7 @@ import javax.inject.Inject
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import net.ukr.vlsv.ippon_secretar.R
+//import net.ukr.vlsv.ippon_secretar.shared_preferences.IpponSharedPreferences
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -24,8 +26,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract val viewModel: BaseViewModel
 
+//    lateinit var sharedPreferences: IpponSharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        sharedPreferences = IpponSharedPreferences(this)
 
         setTitle(
             ippon_Info().getActivityTitle(
