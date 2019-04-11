@@ -18,8 +18,12 @@ import net.ukr.vlsv.ippon_secretar.repositories.ForecastRepository
 import net.ukr.vlsv.ippon_secretar.utils.MessageUtils
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.ukr.vlsv.ippon_secretar.IpponApi.RefCompetitionsResponse
 import net.ukr.vlsv.ippon_secretar.IpponApi.RefDeskResponse
 import net.ukr.vlsv.ippon_secretar.IpponApi.RefJudgesNumberResponse
+import net.ukr.vlsv.ippon_secretar.activities.ListHatActivity
+import net.ukr.vlsv.ippon_secretar.activities.MainActivity
+import net.ukr.vlsv.ippon_secretar.data_base.table.CompetitionsTable
 import net.ukr.vlsv.ippon_secretar.data_base.table.JudgesNumberTable
 import net.ukr.vlsv.ippon_secretar.network.responses.LoginResponse
 
@@ -45,9 +49,16 @@ class ShortSettingsViewModel(
     private val _listJudgesNumber = MutableLiveData<MutableList<JudgesNumberTable>>()
     val listJudgesNumber: LiveData<MutableList<JudgesNumberTable>> get() = _listJudgesNumber
 
+    private val _competitions = MutableLiveData<Int>()
+    val competitions: LiveData<Int> get() = _competitions
+
+    private val _listCompetitions = MutableLiveData<MutableList<CompetitionsTable>>()
+    val listCompetitions: LiveData<MutableList<CompetitionsTable>> get() = _listCompetitions
+
     init {
         update_Desk()
         update_JudgesNumber()
+        update_Competitions()
     }
 
     fun update_Desk() {
@@ -88,6 +99,25 @@ class ShortSettingsViewModel(
 
     }
 
+    fun update_Competitions() {
+        val listCompetitions = db_Repository.getListCompetitions()
+        var idCompetitions   = db_Repository.competitions_ID
+        var findCompetitions = listCompetitions.find{ it -> it.id == idCompetitions}
+
+        if (findCompetitions == null) {
+            if (listCompetitions.count() > 0) {findCompetitions = listCompetitions[0]}
+        }
+
+        _listCompetitions.value = listCompetitions
+
+        if (findCompetitions != null) {
+            var indexCompetitions = listCompetitions.indexOf(findCompetitions)
+            if (indexCompetitions == -1) indexCompetitions = 0
+            _competitions.value = indexCompetitions
+        }
+
+    }
+
     @MainThread
     fun onShortSettingsSyncClicked() {
         ShortSettingsSync()
@@ -100,24 +130,22 @@ class ShortSettingsViewModel(
         val user                 = ipponRepository_1C.userNameAPI_1C
         val listDesk_API         = ipponRepository_1C.getRefDeskList(user.login_user_name, user.login_password).await()
         val listJudgesNumber_API = ipponRepository_1C.getRefJudgesNumberList(user.login_user_name, user.login_password).await()
+        val listCompetitions_API = ipponRepository_1C.getRefCompetitionsList(user.login_user_name, user.login_password).await()
 
         try {
-            // sync
             ShortSettingsSync_DeskTable(listDesk_API)
             ShortSettingsSync_JudgesNumber(listJudgesNumber_API)
-
+            ShortSettingsSync_Competitions(listCompetitions_API)
 
         } catch (e: Exception) {
-            withContext(dispatchersProvider.Main) {
-                // _weatherData.value = null
-            }
+            withContext(dispatchersProvider.Main) {}
             messageUtils.showError(e)
         }
 
-        // update text
-        withContext(dispatchersProvider.Main) {
+        withContext(dispatchersProvider.Main) { // update text
             update_Desk()
             update_JudgesNumber()
+            update_Competitions()
         }
 
         withContext(dispatchersProvider.Main) {_showSpinner.value = false}
@@ -149,6 +177,20 @@ class ShortSettingsViewModel(
             else {
                 findItem.description = it.Description
                 db_Repository.updateJudgesNumber(findItem)}
+        }}
+
+    private fun ShortSettingsSync_Competitions(list_API: RefCompetitionsResponse) {
+        val list_DB  = db_Repository.getListCompetitions()
+
+        list_API.value.forEach {
+            val api_id   = it.Code
+            var findItem = list_DB.find{ it -> it.api_id == api_id}
+
+            if (findItem === null) {
+                db_Repository.insertCompetitions(CompetitionsTable(0, api_id, it.Description, it.date_from, it.date_to, it.place_id))}
+            else {
+                findItem.description = it.Description
+                db_Repository.updateCompetitions(findItem)}
         }}
 
     @MainThread
@@ -223,6 +265,53 @@ class ShortSettingsViewModel(
         if (db_Repository.judgesNumber_ID != judgesNumber_ID) {
             db_Repository.judgesNumber_ID = judgesNumber_ID
         }
+    }
+
+    @MainThread
+    fun onShortSettingsCompetitionsUpDown(up: Boolean) {
+        val listCompetitions  = db_Repository.getListCompetitions()
+        var indexCompetitions = 0
+        var findCompetitions  = listCompetitions.find{ it -> it.id == db_Repository.competitions_ID}
+        var count             = listCompetitions.count()
+
+        if (count == 0) return
+
+        indexCompetitions = listCompetitions.indexOf(findCompetitions)
+
+        if (indexCompetitions == -1) indexCompetitions = 0
+
+        if (up) {
+            indexCompetitions++
+            if (indexCompetitions >= count) indexCompetitions = count - 1
+        }
+        else {
+            indexCompetitions--
+            if (indexCompetitions < 0) indexCompetitions = 0
+        }
+
+        db_Repository.competitions_ID = listCompetitions[indexCompetitions].id
+
+        update_Competitions()
+    }
+
+    @MainThread
+    fun onShortSettingsSpinnerCompetitions(position: Int) {
+        val listCompetitions = db_Repository.getListCompetitions()
+        if (listCompetitions.count() == 0) return
+        val competitions_ID  = listCompetitions[position].id
+        if (db_Repository.competitions_ID != competitions_ID) {
+            db_Repository.competitions_ID = competitions_ID
+        }
+    }
+
+    @MainThread
+    fun onShortSettingsPrevClicked() {
+        _viewAction.value = ViewAction.Navigate(MainActivity::class.java, MainActivity.REQUEST_CODE)
+    }
+
+    @MainThread
+    fun onShortSettingsNextClicked() {
+        _viewAction.value = ViewAction.Navigate(ListHatActivity::class.java, ListHatActivity.REQUEST_CODE)
     }
 
 }

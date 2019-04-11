@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.activity_main.*
 import net.ukr.vlsv.ippon_secretar.R
 import net.ukr.vlsv.ippon_secretar.viewmodels.ShortSettingsViewModel
 import kotlinx.android.synthetic.main.activity_short_settings.*
@@ -14,7 +14,7 @@ import net.ukr.vlsv.ippon_secretar.cache.SPCache
 class ShortSettingsActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
-        const val REQUEST_CODE = 118 //117
+        const val REQUEST_CODE = 102
     }
 
     override val viewModel: ShortSettingsViewModel by viewModelDelegate()
@@ -23,10 +23,10 @@ class ShortSettingsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_short_settings)
 
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
-        }
+//        supportActionBar?.apply {
+//            setDisplayHomeAsUpEnabled(true)
+//            setHomeButtonEnabled(true)
+//        }
 
         viewModel.listDeskNumber.observe(this, Observer {
             val adapter = ArrayAdapter<String>(this, R.layout.spinner_item, R.id.tv_spiner_item)
@@ -49,35 +49,63 @@ class ShortSettingsActivity : BaseActivity(), View.OnClickListener {
         viewModel.judgesNumber.observe(this, Observer {
             spinner_judges_number.setSelection(it)
         })
+
+        viewModel.listCompetitions.observe(this, Observer {
+            val adapter = ArrayAdapter<String>(this, R.layout.spinner_item, R.id.tv_spiner_item)
+            it.forEach {adapter.add(it.description)}
+            if (adapter.count == 0) {adapter.add("Назва змагань")}
+            spinner_competitions.adapter = adapter
+        })
+
+        viewModel.competitions.observe(this, Observer {
+            spinner_competitions.setSelection(it)
+        })
     }
 
     override fun onContentChanged() {
         super.onContentChanged()
-            btn_short_settings_sync.setOnClickListener(this)
 
-            btn_desk_number_up.setOnClickListener(this)
-            btn_desk_number_down.setOnClickListener(this)
+        btn_short_settings_next.setOnClickListener(this)
+        btn_short_settings_prev.setOnClickListener(this)
 
-            btn_judges_number_up.setOnClickListener(this)
-            btn_judges_number_down.setOnClickListener(this)
+        btn_short_settings_sync.setOnClickListener(this)
 
-            spinner_desk_number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(parent: AdapterView<*>?, v: View, position: Int, id: Long) {
-                    viewModel.onShortSettingsSpinnerDeskNumber(position)
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+        btn_desk_number_up.setOnClickListener(this)
+        btn_desk_number_down.setOnClickListener(this)
+
+        btn_judges_number_up.setOnClickListener(this)
+        btn_judges_number_down.setOnClickListener(this)
+
+        btn_competitions_up.setOnClickListener(this)
+        btn_competitions_down.setOnClickListener(this)
+
+        spinner_desk_number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, v: View, position: Int, id: Long) {
+                viewModel.onShortSettingsSpinnerDeskNumber(position)
             }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
 
         spinner_judges_number.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, v: View, position: Int, id: Long) {
                 viewModel.onShortSettingsSpinnerJudgesNumber(position)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-          }
+        }
+
+        spinner_competitions.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, v: View, position: Int, id: Long) {
+                viewModel.onShortSettingsSpinnerCompetitions(position)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.btn_short_settings_prev -> viewModel.onShortSettingsPrevClicked()
+            R.id.btn_short_settings_next -> viewModel.onShortSettingsNextClicked()
+
             R.id.btn_short_settings_sync -> viewModel.onShortSettingsSyncClicked()
 
             R.id.btn_desk_number_up      -> viewModel.onShortSettingsDeskNumberUpDown(true)
@@ -85,6 +113,9 @@ class ShortSettingsActivity : BaseActivity(), View.OnClickListener {
 
             R.id.btn_judges_number_up    -> viewModel.onShortSettingsJudgesNumberUpDown(true)
             R.id.btn_judges_number_down  -> viewModel.onShortSettingsJudgesNumberUpDown(false)
+
+            R.id.btn_competitions_up     -> viewModel.onShortSettingsCompetitionsUpDown(true)
+            R.id.btn_competitions_down   -> viewModel.onShortSettingsCompetitionsUpDown(false)
         }
     }
 

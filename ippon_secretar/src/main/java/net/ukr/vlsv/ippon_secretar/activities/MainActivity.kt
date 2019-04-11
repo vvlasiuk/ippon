@@ -5,12 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.activity_location.*
+//import kotlinx.android.synthetic.main.activity_location.*
 import net.ukr.vlsv.ippon_secretar.R
 import net.ukr.vlsv.ippon_secretar.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), View.OnClickListener {
+
+    companion object {
+        const val REQUEST_CODE = 101
+    }
 
     override val viewModel: MainViewModel by viewModelDelegate()
 
@@ -23,9 +27,6 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             login_user_name.setText(it?.login_user_name)
             login_password.setText(it?.login_password)
         })
-//        viewModel.weatherData.observe(this, Observer {
-//            txt_main.text = it?.toString() ?: getString(R.string.no_data)
-//        })
 
         setContentView(R.layout.activity_main)
     }

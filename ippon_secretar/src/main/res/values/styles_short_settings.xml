@@ -2,8 +2,8 @@
 <resources>
     <style name="ImageButton_ShortSettings">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
         <item name="android:layout_weight">1</item>
     </style>
 
@@ -22,10 +22,8 @@
         <item name="android:layout_marginEnd">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
-        <!--<item name="tools:layout_editor_absoluteX">8dp</item>-->
-        <!--<item name="tools:layout_editor_absoluteY">296dp</item>-->
     </style>
 
     <style name="RelativeLayout">

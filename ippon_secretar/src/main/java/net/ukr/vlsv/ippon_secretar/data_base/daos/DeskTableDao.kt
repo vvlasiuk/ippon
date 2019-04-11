@@ -1,6 +1,5 @@
 package net.ukr.vlsv.ippon_secretar.data_base.daos
 
-//import androidx.lifecycle.LiveData
 import androidx.room.*
 import net.ukr.vlsv.ippon_secretar.data_base.table.DeskTable
 
