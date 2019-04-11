@@ -7,14 +7,11 @@ import net.ukr.vlsv.ippon_secretar.network.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import net.ukr.vlsv.ippon_secretar.IpponApi.ConstantsResponse
-import net.ukr.vlsv.ippon_secretar.IpponApi.RefDeskResponse
-import net.ukr.vlsv.ippon_secretar.IpponApi.RefEnterUserResponse
-import net.ukr.vlsv.ippon_secretar.IpponApi.RefJudgesNumberResponse
+import net.ukr.vlsv.ippon_secretar.IpponApi.*
 import net.ukr.vlsv.ippon_secretar.extensions.await
+import net.ukr.vlsv.ippon_secretar.ippon_api.ippon_api_1c.data.RefDataFiles_1C
 import net.ukr.vlsv.ippon_secretar.ippon_api.ippon_api_1c.data.RefEnterUser
-import net.ukr.vlsv.ippon_secretar.network.responses.LoginResponse
-import net.ukr.vlsv.ippon_secretar.network.responses.WeatherResponse
+import net.ukr.vlsv.ippon_secretar.ippon_api.ippon_api_1c.data.RefOcrScan_1C
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
@@ -62,6 +59,36 @@ class IpponRepository_1C @Inject constructor(
         apiClient.ipoonService.getRefJudgesNumberList(
                 login_user_name,
                 login_password
+        ).await()
+    }
+
+    fun getRefCompetitionsList(login_user_name: String, login_password: String): Deferred<RefCompetitionsResponse> = async {
+        apiClient.ipoonService.getRefCompetitionsList(
+                login_user_name,
+                login_password
+        ).await()
+    }
+
+    fun getRefHatsList(login_user_name: String, login_password: String): Deferred<RefHatsResponse> = async {
+        apiClient.ipoonService.getRefHatsList(
+                login_user_name,
+                login_password
+        ).await()
+    }
+
+    fun addFile(login_user_name: String, login_password: String, refDataFiles_1C: RefDataFiles_1C): Deferred<RefDataFilesResponse> = async {
+        apiClient.ipoonService.addFile(
+                login_user_name,
+                login_password,
+                refDataFiles_1C
+        ).await()
+    }
+
+    fun ocr_scan(login_user_name: String, login_password: String, refOcrScan_1C: RefOcrScan_1C): Deferred<RefOcrScanResponse> = async {
+        apiClient.ipoonService.ocr_scan(
+                login_user_name,
+                login_password,
+                refOcrScan_1C
         ).await()
     }
 }

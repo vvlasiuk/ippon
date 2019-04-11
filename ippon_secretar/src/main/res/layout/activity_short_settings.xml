@@ -21,11 +21,39 @@
     </RelativeLayout>
 
     <RelativeLayout
-            android:id="@+id/desk_number_RelativeLayout"
+            android:id="@+id/competitions_RelativeLayout"
             style="@style/RelativeLayout"
             tools:layout_editor_absoluteX="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/short_settings_RelativeLayout">
+
+        <ImageButton
+                android:id="@+id/btn_competitions_down"
+                style="@style/ImageButtonLeft_ShortSettings"
+                app:srcCompat="@mipmap/left" />
+
+        <Spinner
+                android:id="@+id/spinner_competitions"
+                android:layout_alignTop="@+id/btn_competitions_up"
+                android:layout_alignBottom="@+id/btn_competitions_down"
+                android:layout_toStartOf="@+id/btn_competitions_up"
+                android:layout_toEndOf="@+id/btn_competitions_down"
+                style="@style/Spinner_ShortSettings"/>
+
+        <ImageButton
+                android:id="@+id/btn_competitions_up"
+                style="@style/ImageButtonRight_ShortSettings"
+                app:srcCompat="@mipmap/right" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/desk_number_RelativeLayout"
+            style="@style/RelativeLayout"
+            tools:layout_editor_absoluteX="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/competitions_RelativeLayout">
 
         <ImageButton
             android:id="@+id/btn_desk_number_down"
@@ -79,7 +107,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_short_settings_next"
+            android:id="@+id/btn_short_settings_prev"
             style="@style/ImageButtonLeft_ShortSettings"
             app:srcCompat="@mipmap/quit"/>
 

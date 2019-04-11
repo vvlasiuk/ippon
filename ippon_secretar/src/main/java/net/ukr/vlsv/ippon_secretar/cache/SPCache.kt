@@ -18,6 +18,8 @@ class SPCache @Inject constructor(private val sharedPreferences: SharedPreferenc
         internal const val PREF_API_CONNECTED    = "PREF_API_CONNECTED"
         internal const val PREF_Desk_ID          = "PREF_Desk_ID"
         internal const val PREF_JudgesNumber_ID  = "PREF_JudgesNumber_ID"
+        internal const val PREF_Competitions_ID  = "PREF_Competitions_ID"
+        internal const val PREF_hats_ID          = "PREF_hats_ID"
 
     }
 
@@ -42,5 +44,13 @@ class SPCache @Inject constructor(private val sharedPreferences: SharedPreferenc
 
     var judgesNumber_ID: Int = sharedPreferences.getInt(PREF_JudgesNumber_ID, 0)!!
         set(value) {if (sharedPreferences.edit().putInt(PREF_JudgesNumber_ID, value).commit()) {field = value}
+        }
+
+    var competitions_ID: Int = sharedPreferences.getInt(PREF_Competitions_ID, 0)!!
+        set(value) {if (sharedPreferences.edit().putInt(PREF_Competitions_ID, value).commit()) {field = value}
+        }
+
+    var hats_ID: Int = sharedPreferences.getInt(PREF_hats_ID, 0)!!
+        set(value) {if (sharedPreferences.edit().putInt(PREF_hats_ID, value).commit()) {field = value}
         }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">ippon secretar</string>
     <string name="something_was_wrong">Щось пішло не так</string>
     // LOGIN
-    <string name="login_title">Секретар змагань</string>
+    <string name="login_title">Авторизація</string>
     <string name="login_user_name">Імя користувача</string>
     <string name="login_user_password">Пароль користувача</string>
     <string name="login_save">Зберегти</string>
@@ -12,8 +12,13 @@
     <string name="desk_number_text">Номер столу</string>
     <string name="referee_number">Кількість суддів: 3</string>
     <string name="age_categories">Вікові категорії:</string>
+    <string name="competitions">Назва змагань:</string>
     // MESSAGE
     <string name="msg_API_version_err">Версія API не відповідає версії додатку</string>
+    // ADD LIST HAT
+    <string name="list_hat_add_category_name">Назва категорії</string>
+
+
     // удалити
     <string name="location">Location</string>
     <string name="change_location">Change location</string>
@@ -21,4 +26,5 @@
     <string name="loading">Loading</string>
     <string name="no_data">No data</string>
     <string name="error_empty_location">Location can not be empty</string>
+    // удалити
 </resources>

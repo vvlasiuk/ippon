@@ -36,7 +36,6 @@ import java.util.*
 class MainViewModel(
         application: Application,
         coroutineDispatchersProvider: CoroutineDispatchersProvider,
-//        private val forecastRepository: ForecastRepository,
         private val ipponRepository_1C: IpponRepository_1C,
         private val messageUtils: MessageUtils
 ) : BaseViewModel(application, coroutineDispatchersProvider), LifecycleObserver {
@@ -46,9 +45,6 @@ class MainViewModel(
 
     private val _userNameAPI_1C = MutableLiveData<LoginResponse>()
     val userNameAPI_1C: LiveData<LoginResponse> get() = _userNameAPI_1C
-
-//    private val _weatherData = MutableLiveData<WeatherResponse>()
-//    val weatherData: LiveData<WeatherResponse> get() = _weatherData
 
     init {
         _userNameAPI_1C.value = ipponRepository_1C.userNameAPI_1C
